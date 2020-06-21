@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+@-ms-viewport{
+  width: device-width;
+  height: device-height;
+}
+
+#searchbar {
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline;
+}
+
+#searchbutton{
+	background-color: green;
+	color: white;
+	border-radius: 0.5em;
+}
