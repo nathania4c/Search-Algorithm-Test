@@ -10,12 +10,14 @@
             $index = 0;
     } else {
     
-    $host = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "Fabelio";
-    
-    $mysqli = new mysqli($host, $username,$password, $dbname);
+    $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
+    $server = $url["host"];
+    $username = $url["user"];
+    $password = $url["pass"];
+    $db = substr($url["path"], 1);
+
+    $mysqli = new mysqli($server, $username, $password, $db);
     
     if($mysqli -> connect_errno){
         die("Connection failed: " . $mysqli->connect_error);
