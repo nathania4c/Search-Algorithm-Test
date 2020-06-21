@@ -31,3 +31,24 @@
         </footer>
     </body>
 	</html>
+
+<?php
+	$sql = "drop table if exists intern-test-data;
+		create table intern-test-data (
+			product name varchar(100) NOT NULL,
+			price int(10) NOT NULL,
+			dimension varchar(100) NOT NULL,
+			colours varchar(100) NOT NULL,
+			material varchar(100) NOT NULL,
+			image varchar(500) NOT NULL
+		);
+
+	LOAD DATA INFILE 'intern-test-data.csv' 
+	INTO TABLE intern-test-data 
+	FIELDS TERMINATED BY ',' 
+	ENCLOSED BY '"'
+	LINES TERMINATED BY '\n'
+	IGNORE 1 ROWS;
+	";
+	mysqli_query($mysqli, $sql);
+?>
