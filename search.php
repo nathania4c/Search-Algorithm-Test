@@ -111,7 +111,7 @@
     	<header>
     	</header>
     	<main>
-    		<?php
+      		<?php
     		
     		$count=0;
     		
@@ -122,7 +122,7 @@
     		        continue;
     		    }
     		    
-    		    echo "<h2>".$similars[$key]["product name"]."</h2>";
+    		    echo "<h2>".$similars[$key]["productname"]."</h2>";
     		    echo "<img src='".$similars[$key]["image"]."' width=450px>";
     		    echo "<table>";
     		    echo "<tr><th style='text-align:left'>Material: </th><td>".$similars[$key]["material"]."</td></tr>";
@@ -141,6 +141,7 @@
         </main>
         <footer style="padding-top: 1em;">
         	<a href="index.php"><button>Back To Index</button></a>
+            <p>Refresh the page to see the next best match</p>
         </footer>
     
     </body>
