@@ -32,7 +32,10 @@
     
     $sql = "Select * From MyTable where `productname` like '$keyword' order by `productname`, `price` DESC";
     $result = $mysqli -> query($sql);
-    $bestmatch = mysqli_fetch_assoc($result);
+    
+    $similars = array();
+    
+if ($bestmatch = mysqli_fetch_assoc($result)){
     
     $productname = $bestmatch["productname"];
     $image = $bestmatch["image"];
@@ -42,7 +45,6 @@
     $colours = explode(", ", $colours);
     $material = $bestmatch["material"];
     
-    $similars = array();
     $similars[$productname] = $bestmatch;
     mysqli_free_result($result);
     
@@ -95,6 +97,8 @@
     
     $_SESSION["array"] = $similars;
     
+}
+    
     mysqli_close($mysqli);
     
     }
@@ -112,6 +116,10 @@
     	</header>
     	<main>
       		<?php
+            
+            if (count($similars) == 0){
+    		    echo "<p> sorry, no matches. Go back to index and search a different keyword</p>";
+    		} else {
     		
     		$count=0;
     		
@@ -136,7 +144,7 @@
     		}
     		
     		$_SESSION["index"] = $index;
-    		
+            }
     		?>
         </main>
         <footer style="padding-top: 1em;">
