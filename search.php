@@ -10,14 +10,14 @@
             $index = 0;
     } else {
     
-    $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    $url = getenv('JAWSDB_URL');
+    $dbparts = parse_url($url);
+    $hostname = $dbparts['host'];
+    $username = $dbparts['user'];
+    $password = $dbparts['pass'];
+    $database = ltrim($dbparts['path'],'/');
 
-    $server = $url["host"];
-    $username = $url["user"];
-    $password = $url["pass"];
-    $db = substr($url["path"], 1);
-
-    $mysqli = new mysqli($server, $username, $password, $db);
+    $mysqli = new mysqli($hostname, $username, $password, $database);
     
     if($mysqli -> connect_errno){
         die("Connection failed: " . $mysqli->connect_error);
