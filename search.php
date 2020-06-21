@@ -10,7 +10,7 @@
             $index = 0;
     } else {
     
-    $url = getenv('mysql://jrnwjou8ss931rvj:q2u8qhp6hitvu325@sq65ur5a5bj7flas.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/bciuo2qqnnfc5btx');
+    $url = getenv('JAWSDB_URL');
     $dbparts = parse_url($url);
     $hostname = $dbparts['host'];
     $username = $dbparts['user'];
@@ -30,11 +30,11 @@
         $keyword = "%%";
     }
     
-    $sql = "Select * From intern_test_data where `product name` like '$keyword' order by `product name`, `price` DESC";
+    $sql = "Select * From MyTable where `productname` like '$keyword' order by `productname`, `price` DESC";
     $result = $mysqli -> query($sql);
     $bestmatch = mysqli_fetch_assoc($result);
     
-    $productname = $bestmatch["product name"];
+    $productname = $bestmatch["productname"];
     $image = $bestmatch["image"];
     $price = $bestmatch["price"];
     $dimension = $bestmatch["dimension"];
@@ -47,21 +47,21 @@
     mysqli_free_result($result);
     
     //match by material
-    $sql = "Select * From intern_test_data where `material` = '$material' order by `product name`, `price` DESC";
+    $sql = "Select * From MyTable where `material` = '$material' order by `productname`, `price` DESC";
     $result = $mysqli -> query($sql);
     while ($likematerial = mysqli_fetch_assoc($result)){
-        if (!array_key_exists($likematerial["product name"], $similars)){
-            $similars[$likematerial["product name"]] = $likematerial;
+        if (!array_key_exists($likematerial["productname"], $similars)){
+            $similars[$likematerial["productname"]] = $likematerial;
         }
     }
     mysqli_free_result($result);
     
     //match by dimension
-    $sql = "Select * From intern_test_data where `dimension` = '$dimension' order by `product name`, `price` DESC";
+    $sql = "Select * From MyTable where `dimension` = '$dimension' order by `productname`, `price` DESC";
     $result = $mysqli -> query($sql);
     while ($likedimension = mysqli_fetch_assoc($result)){
-        if (!array_key_exists($likedimension["product name"], $similars)){
-            $similars[$likedimension["product name"]] = $likedimension;
+        if (!array_key_exists($likedimension["productname"], $similars)){
+            $similars[$likedimension["productname"]] = $likedimension;
         }
     }
     mysqli_free_result($result);
@@ -69,22 +69,22 @@
     //match by price
     $price = substr($price, 0, 1);
     $price = $price."%";
-    $sql = "Select * From intern_test_data where `price` like '$price' order by `product name`";
+    $sql = "Select * From MyTable where `price` like '$price' order by `productname`";
     $result = $mysqli -> query($sql);
     while ($likeprice = mysqli_fetch_assoc($result)){
-        if (!array_key_exists($likeprice["product name"], $similars)){
-            $similars[$likeprice["product name"]] = $likeprice;
+        if (!array_key_exists($likeprice["productname"], $similars)){
+            $similars[$likeprice["productname"]] = $likeprice;
         }
     }
     
     //match by each colour
     foreach ($colours as $c){
         $c = "%".$c."%";
-        $sql = "Select * From intern_test_data where `colours` like '$c' order by `product name`, `price` DESC";
+        $sql = "Select * From MyTable where `colours` like '$c' order by `productname`, `price` DESC";
         $result = $mysqli -> query($sql);
         while ($likecolours = mysqli_fetch_assoc($result)){
-            if (!array_key_exists($likecolours["product name"], $similars)){
-                $similars[$likecolours["product name"]] = $likecolours;
+            if (!array_key_exists($likecolours["productname"], $similars)){
+                $similars[$likecolours["productname"]] = $likecolours;
             }
         }
         mysqli_free_result($result);
