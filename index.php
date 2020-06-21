@@ -3,6 +3,9 @@
     
     session_start();
     
+	unset($_SESSION["index"]);
+   	unset($_SESSION["array"]);
+
     if (isset($_GET["search"])){
         $_SESSION["keyword"] = $_GET["search"];
     }
