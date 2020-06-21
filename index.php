@@ -34,7 +34,7 @@
 
 <?php
 
-    $url = getenv('JAWSDB_URL');
+    $url = getenv('mysql://jrnwjou8ss931rvj:q2u8qhp6hitvu325@sq65ur5a5bj7flas.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/bciuo2qqnnfc5btx');
     $dbparts = parse_url($url);
     $hostname = $dbparts['host'];
     $username = $dbparts['user'];
